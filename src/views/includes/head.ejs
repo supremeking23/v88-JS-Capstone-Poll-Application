@@ -35,6 +35,8 @@
 				// 	M.toast({ html: $(".notification-message").val(), classes: $(".notification-style").val() });
 				// }
 
+				$("textarea").focus();
+
 				$(".add-choice").click(function () {
 					let html = ``;
 					html += `<div class="row">`;
@@ -44,7 +46,7 @@
 					html += `		<label for="choice">Choice</label>`;
 					html += `	</div>`;
 					html += `	<div class="col s4">`;
-					html += ` 		<button>trash</button>`;
+					html += ` 		<button type="button" class=" btn btn-danger delete-choice"><i class="material-icons">delete_forever</i></button>`;
 					html += `	</div>`;
 					html += `</li>`;
 					html += `</div>`;
@@ -52,6 +54,12 @@
 					// html += `<row><li>ivan</li></row>`;
 
 					$(".choices-list").append(html);
+				});
+
+				$(document).on("click", ".delete-choice", function () {
+					// alert("clikc");
+					console.log($(this).parent().parent().parent());
+					$(this).parent().parent().parent().remove();
 				});
 			});
 		</script>

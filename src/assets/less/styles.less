@@ -1,0 +1,60 @@
+@black-primary: #333;
+@black-secondary: #222;
+
+@green-primary: #00ff43;
+body {
+	background: @black-primary;
+
+	background-image: url("https://www.transparenttextures.com/patterns/argyle.png");
+	/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+}
+
+nav {
+	background: @black-secondary;
+	.brand-logo {
+		color: @green-primary;
+	}
+}
+
+.mt-2 {
+	margin-top: 2rem;
+}
+
+.p-2 {
+	padding: 2rem !important;
+}
+
+.pl-2 {
+	padding-left: 2rem !important;
+}
+
+.display-4 {
+	font-size: 3.5rem;
+	font-weight: 300;
+	line-height: 1.2;
+}
+
+.lead {
+	font-size: 1.25rem;
+	font-weight: 300;
+}
+
+.img-fluid {
+	max-width: 100%;
+	height: auto;
+}
+
+.button-primary {
+	background: #00dd3a;
+	border-color: #00dd3a;
+}
+
+.card {
+	padding: 1rem;
+	background: @black-secondary;
+	color: #fff;
+	h2 {
+		border-bottom: 1px solid #fff;
+		padding-bottom: 20px;
+	}
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+		<!--Import Google Icon Font-->
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+		<!-- Compiled and minified CSS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+
+		<!-- Compiled and minified JavaScript -->
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+		<link rel="stylesheet/less" type="text/css" href="/less/styles.less" />
+		<script src="//cdn.jsdelivr.net/npm/less@3.13"></script>
+
+		<style></style>
+
+		<script>
+			// Or with jQuery
+			$(document).ready(function () {
+				// $(".sidenav").sidenav();
+				// $(".modal").modal();
+				// $("select").formSelect();
+				// var Modalelem = document.querySelector(".modal-error");
+				// var instance = M.Modal.init(Modalelem);
+				// if ($(".form_errors").val() == "true") {
+				// 	instance.open();
+				// }
+				// if ($(".notification-message").val() != "") {
+				// 	M.toast({ html: $(".notification-message").val(), classes: $(".notification-style").val() });
+				// }
+
+				$(".add-choice").click(function () {
+					let html = ``;
+					html += `<div class="row">`;
+					html += `<li>`;
+					html += `	<div class="input-field col s8">`;
+					html += `		<input  id="choice" name="choice[]" type="text" class="validate">`;
+					html += `		<label for="choice">Choice</label>`;
+					html += `	</div>`;
+					html += `	<div class="col s4">`;
+					html += ` 		<button>trash</button>`;
+					html += `	</div>`;
+					html += `</li>`;
+					html += `</div>`;
+
+					// html += `<row><li>ivan</li></row>`;
+
+					$(".choices-list").append(html);
+				});
+			});
+		</script>
+		<title>Capstone</title>
+	</head>
+</html>

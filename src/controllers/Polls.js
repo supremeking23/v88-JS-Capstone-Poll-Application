@@ -1,6 +1,6 @@
 class Polls {
 	index(req, res) {
-		res.send("hi");
+		res.render("index");
 	}
 }
 

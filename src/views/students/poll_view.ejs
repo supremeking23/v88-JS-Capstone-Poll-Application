@@ -8,23 +8,25 @@
             <div class="row mt-2">
                 <div class="col s12">
                     <div class="card p-2">
-                        <h3>Question posted by the teacher</h3>
-                        <form action="/create_poll_process" method="POST">
+                        <h3><%= question %></h3>
+                        <form action="/submit_response_process" method="POST">
                             <div class="row">
                                 <div class="col s12">
-                                    <p>
-                                        <label>
-                                            <input class="with-gap" name="group1" type="radio"  />
-                                            <span>Green</span>
-                                        </label>
-                                    </p>
+                                    <%for(let choice in choice_list){ %>
+                                        <p>
+                                            <label >
+                                                <input class="with-gap" name="choice" type="radio" value="<%= choice_list[choice].choice %>"  />
+                                                <span><%= choice_list[choice].choice %></span>
+                                            </label>
+                                        </p>
+                                    <% } %>
 
-                                    <p>
+                                    <!-- <p>
                                         <label>
                                             <input class="with-gap" name="group1" type="radio"  />
                                             <span>Green</span>
                                         </label>
-                                    </p>
+                                    </p> -->
                                      
                                 </div>
                               

@@ -72,7 +72,7 @@ class Teachers {
 		for (let i = 0; i < req.body.choice.length; i++) {
 			choices.push({
 				choice: req.body.choice[i],
-				vote: 10,
+				vote: 0,
 			});
 		}
 		client.hmset("poll_question", ["question", req.body.question, "choices", JSON.stringify(choices)], (err, result) => {

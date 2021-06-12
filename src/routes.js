@@ -5,7 +5,16 @@ module.exports = (app) => {
 	const pollsController = require("./controllers/Polls");
 	const poll = new pollsController();
 
+	const studentsController = require("./controllers/Students");
+	const student = new studentsController();
+
 	app.get("/", poll.index);
 	app.get("/teacher_index", teacher.teacher_index);
 	app.get("/create_poll", teacher.teacher_create_poll);
+	app.get("/teacher_response_data", teacher.teacher_response_data);
+	app.get("/teacher_response_data_json", teacher.teacher_response_data_json);
+
+	app.get("/student_poll", student.poll_view);
+
+	app.post("/create_poll_process", teacher.create_poll_process);
 };

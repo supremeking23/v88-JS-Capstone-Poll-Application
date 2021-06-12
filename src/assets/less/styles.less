@@ -79,3 +79,20 @@ textarea {
 		padding-bottom: 20px;
 	}
 }
+
+.start-collecting-button,
+.stop-collecting-button {
+	width: 100%;
+	font-weight: bold;
+}
+
+[type="radio"]:checked + span:after,
+[type="radio"].with-gap:checked + span:after {
+	background-color: #00dd3a;
+}
+
+[type="radio"]:checked + span:after,
+[type="radio"].with-gap:checked + span:before,
+[type="radio"].with-gap:checked + span:after {
+	border: 2px solid #00dd3a;
+}

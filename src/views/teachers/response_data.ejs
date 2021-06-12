@@ -1,0 +1,103 @@
+<%- include('../includes/head')%>
+	<body>
+		<%- include('../includes/nav')%>
+
+		<div class="mt-2 container">
+			<!-- Page Layout here -->
+
+            <div class="row mt-2">
+                <div class="col s12">
+                    <div class="card p-2">
+                        <!-- <h3>Poll Question</h3> -->
+                      
+                            <div class="row">
+                             
+                                    <!-- <div class="row">
+                                        <div class="input-field col s12">
+                                       
+                                          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque ipsam fugiat dolore veritatis, quis quod doloribus iure dolorem inventore ex. Sed minima aspernatur voluptatem blanditiis voluptatum reiciendis earum maxime tempore!
+                                          Ad maiores in aut earum odio similique recusandae quasi enim, non quis cum? Debitis a iusto dolor consectetur autem doloremque placeat animi quo sit nemo, omnis nisi maiores quam fugiat?</p>
+                                        </div>
+                                    </div> -->
+
+                                    <!-- <h5>Response</h5> -->
+                                    
+                                    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                               
+                            </div>
+                       
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row mt-2">
+                <div class="col s12">
+                    <div class="card p-2">
+                        <button type="button" class="btn btn-danger stop-collecting-button btn-large">Stop collecting response (<span class="live-vote-count">5 voted</span>,<span class="live-count">7 live</span>)</button>
+                        <!-- Start collecting response (<span class="live-count">0</span> live) -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col s12">
+                    <div class="card p-2">
+                      <h4>Responses</h4>
+                      <p>Invite your students to this url:google.com. Once students join this link, you can start collecting responses </p>
+
+                    
+                    </div>
+                </div>
+            </div>
+		
+		</div>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+		<script>
+            $(document).ready(function(){
+
+                $.get(`http://localhost:9000/teacher_response_data_json`,function(response){
+                    console.log(response);
+
+                    var chart = new CanvasJS.Chart("chartContainer", {
+                        animationEnabled: true,
+                        theme: "dark2", // "light1", "light2", "dark1", "dark2"
+                        title:{
+                            text: `<%= question %>`
+                        },
+                        axisY: {
+                            title: ""
+                        },
+                        axisY:{
+                            // interval: 10,
+                            // suffix: "%" //going to workin in stacked bar
+                        },
+                        data: [{        
+                            type: "column",  
+                            showInLegend: true, 
+                            legendMarkerColor: "grey",
+                            legendText: "",
+                            // dataPoints: [      
+                            //     // { y: 300878, label: "Venezuela" },
+                            //     // { y: 266455,  label: "Saudi" },
+                            //     // { y: 169709,  label: "Canada" },
+                            //     // { y: 158400,  label: "Iran" },
+                            //     // { y: 142503,  label: "Iraq" },
+                            //     // { y: 101500, label: "Kuwait" },
+                            //     // { y: 97800,  label: "UAE" },
+                        
+                        
+                            // ]
+
+                            dataPoints: response.response_list
+
+                        }]
+                    });
+                    chart.render();
+
+
+                },"json");
+            });
+        </script>
+    </body>
+</html>

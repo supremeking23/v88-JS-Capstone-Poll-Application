@@ -18,11 +18,19 @@
 		<link rel="stylesheet/less" type="text/css" href="/less/styles.less" />
 		<script src="//cdn.jsdelivr.net/npm/less@3.13"></script>
 
+		<script
+			src="https://cdn.socket.io/3.1.3/socket.io.min.js"
+			integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh"
+			crossorigin="anonymous"
+		></script>
+
 		<style></style>
 
 		<script>
 			// Or with jQuery
 			$(document).ready(function () {
+				const socket = io();
+
 				// $(".sidenav").sidenav();
 				// $(".modal").modal();
 				// $("select").formSelect();
@@ -60,6 +68,18 @@
 					// alert("clikc");
 					console.log($(this).parent().parent().parent());
 					$(this).parent().parent().parent().remove();
+				});
+
+				// with socket
+
+				$(".start-collecting-button").click(function () {
+					// alert("start collecting data");
+					socket.emit("start-collecting-data", { message: "start collecting data trigger" });
+				});
+
+				socket.on("start-collecting-data-response", function (data) {
+					console.log(data.message);
+					$(".answer-poll").removeClass("disabled");
 				});
 			});
 		</script>

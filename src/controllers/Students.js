@@ -2,7 +2,7 @@ const redis = require("redis");
 const client = redis.createClient(6379); //port number is optional
 
 client.on("connect", function () {
-	console.log("Connected to Redis...");
+	console.log("Connected to Redis...students");
 });
 
 client.on("error", function (error) {
@@ -13,7 +13,7 @@ class Students {
 	poll_view(req, res) {
 		client.exists("poll_question", async (err, result) => {
 			if (result == 0) {
-				res.redirect("/teacher_create_poll");
+				res.redirect("/");
 				return false;
 			}
 			client.hgetall("poll_question", async (err, obj) => {

@@ -2,7 +2,7 @@ const redis = require("redis");
 const client = redis.createClient(6379); //port number is optional
 
 client.on("connect", function () {
-	console.log("Connected to Redis...");
+	console.log("Connected to Redis...teacher");
 });
 
 client.on("error", function (error) {
@@ -79,7 +79,7 @@ class Teachers {
 			console.log(`here are the results ${result}`);
 		});
 
-		client.expire("user_session", 7200); ///expire in 2hrs
+		client.expire("poll_question", 7200); ///expire in 2hrs
 		console.log(req.body);
 		res.redirect("/create_poll");
 	}

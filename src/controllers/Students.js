@@ -11,6 +11,7 @@ client.on("error", function (error) {
 
 class Students {
 	poll_view(req, res) {
+		console.log("from poll view");
 		client.exists("poll_question", async (err, result) => {
 			if (result == 0) {
 				res.redirect("/");

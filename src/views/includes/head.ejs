@@ -103,6 +103,11 @@
 					console.log(data.message);
 					$(".answer-poll").addClass("disabled");
 				});
+
+				socket.on("student-enter-the-poll-response", function (data) {
+					$(".live-count").html(`${data.number_of_students} live`);
+					console.log(`student count ${data.number_of_students}`);
+				});
 			});
 		</script>
 		<title>Capstone</title>

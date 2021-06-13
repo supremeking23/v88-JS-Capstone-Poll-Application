@@ -42,7 +42,13 @@
 		
 		</div>
 
-		<script></script>
+		<script>
+           $(document).ready(function(){
+                const socket = io();
+               console.log("student enter the poll");
+               socket.emit("student-enter-the-poll",{message:"student enter the poll"});
+           })
+        </script>
 
 		<!-- Option 2: Separate Popper and Bootstrap JS -->
 		<!--

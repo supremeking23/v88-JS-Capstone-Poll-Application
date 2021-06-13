@@ -31,6 +31,8 @@
 			$(document).ready(function () {
 				const socket = io();
 
+				$(".stop-collecting-button").hide();
+
 				// $(".sidenav").sidenav();
 				// $(".modal").modal();
 				// $("select").formSelect();
@@ -75,11 +77,31 @@
 				$(".start-collecting-button").click(function () {
 					// alert("start collecting data");
 					socket.emit("start-collecting-data", { message: "start collecting data trigger" });
+					$(this).hide();
+					$(".stop-collecting-button").show();
+
+					// let html = `Stop collecting response (<span class="live-vote-count">5 voted</span>,<span class="live-count">7 live</span>)`;
+					// $(this).html(html);
+					// $(this).removeClass("start-collecting-button");
+					// $(this).removeClass("button-primary");
+					// $(this).addClass("stop-collecting-button");
+					// $(this).addClass("btn-danger");
+				});
+
+				$(".stop-collecting-button").click(function () {
+					$(this).hide();
+					$(".start-collecting-button").show();
+					socket.emit("stop-collecting-data", { message: "stop collecting data trigger" });
 				});
 
 				socket.on("start-collecting-data-response", function (data) {
 					console.log(data.message);
 					$(".answer-poll").removeClass("disabled");
+				});
+
+				socket.on("stop-collecting-data-response", function (data) {
+					console.log(data.message);
+					$(".answer-poll").addClass("disabled");
 				});
 			});
 		</script>

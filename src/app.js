@@ -29,6 +29,10 @@ io.on("connection", function (socket) {
 		socket.broadcast.emit("start-collecting-data-response", { message: "start collecting data response" });
 	});
 
+	socket.on("stop-collecting-data", function (data) {
+		socket.broadcast.emit("stop-collecting-data-response", { message: "stop collecting data response" });
+	});
+
 	socket.on("disconnect", function () {
 		console.log(`a user is disconnected`);
 

@@ -20,6 +20,9 @@ module.exports = (app) => {
 	app.get("/get_vote_count_json", teacher.get_vote_count_json);
 
 	app.post("/create_poll_process", teacher.create_poll_process);
+
+	app.post("/create_poll_process_ajax", teacher.create_poll_process_ajax);
+
 	app.post("/submit_response_process", student.submit_response_process);
 
 	app.post("/submit_response_process_json", student.submit_response_process_json);

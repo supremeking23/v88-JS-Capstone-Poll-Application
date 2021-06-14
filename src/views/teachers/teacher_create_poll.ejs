@@ -9,7 +9,7 @@
                 <div class="col s12">
                     <div class="card p-2">
                         <h3>Create Poll</h3>
-                        <form action="/create_poll_process" method="POST">
+                        <form action="/create_poll_process_ajax" method="POST">
                             <div class="row">
                                
                                 <div class="row">
@@ -82,7 +82,20 @@
 		
 		</div>
 
-		<script></script>
+		<script>
+            $(document).ready(function(){
+                $("form").submit(function(){
+                    $.post($(this).attr("action"),$(this).serialize(),function(response){
+                        console.log(response);
+                        M.toast({ html: response.message ,classes: `button-primary`});
+                    },"json");
+
+                    $(".choices-list").html(``);
+                    $(this).trigger("reset");
+                    return false;
+                })
+            });
+        </script>
 
 		<!-- Option 2: Separate Popper and Bootstrap JS -->
 		<!--

@@ -96,6 +96,11 @@
 
 				$(".stop-collecting-button-main").click(function () {
 					// $(this).hide();
+
+					setTimeout(() => {
+						// Simulate an HTTP redirect:
+						window.location.replace("http://localhost:9000/create_poll");
+					}, 500);
 					$(".stop-collecting-button").hide();
 					$(".start-collecting-button").show();
 					socket.emit("stop-collecting-data", { message: "stop collecting data trigger" });

@@ -29,6 +29,7 @@
 		<script>
 			// Or with jQuery
 			$(document).ready(function () {
+				$(".modal").modal();
 				const socket = io();
 
 				socket.emit("get_poll_application_session", { message: "get poll application session" });
@@ -38,8 +39,9 @@
 					if (data.state == "true") {
 						//convert string to bool
 
-						$(".start-collecting-button").hide();
+						// $(".start-collecting-button").hide();
 						$(".stop-collecting-button").show();
+						$(".start-collecting-button").hide();
 					} else if (data.state == "false") {
 						$(".stop-collecting-button").hide();
 						$(".start-collecting-button").show();
@@ -81,6 +83,7 @@
 					// alert("start collecting data");
 					socket.emit("start-collecting-data", { message: "start collecting data trigger" });
 					$(this).hide();
+					// $(this).remove();
 					$(".stop-collecting-button").show();
 
 					// let html = `Stop collecting response (<span class="live-vote-count">5 voted</span>,<span class="live-count">7 live</span>)`;
@@ -91,10 +94,17 @@
 					// $(this).addClass("btn-danger");
 				});
 
-				$(".stop-collecting-button").click(function () {
-					$(this).hide();
+				$(".stop-collecting-button-main").click(function () {
+					// $(this).hide();
+					$(".stop-collecting-button").hide();
 					$(".start-collecting-button").show();
 					socket.emit("stop-collecting-data", { message: "stop collecting data trigger" });
+					// return false;
+				});
+				$(".stop-collecting-button").click(function () {
+					// $(this).hide();
+					// $(".start-collecting-button").show();
+					// socket.emit("stop-collecting-data", { message: "stop collecting data trigger" });
 				});
 
 				socket.on("start-collecting-data-response", function (data) {

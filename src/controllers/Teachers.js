@@ -42,6 +42,25 @@ class Teachers {
 		});
 	}
 
+	// process
+	create_poll_process(req, res) {
+		let choices = [];
+		for (let i = 0; i < req.body.choice.length; i++) {
+			choices.push({
+				choice: req.body.choice[i],
+				vote: 0,
+			});
+		}
+		client.hmset("poll_question", ["question", req.body.question, "choices", JSON.stringify(choices)], (err, result) => {
+			console.log(`here are the results ${result}`);
+		});
+
+		client.expire("poll_question", 7200); ///expire in 2hrs
+		console.log(req.body);
+		res.redirect("/create_poll");
+	}
+
+	// all json related
 	teacher_response_data_json(req, res) {
 		client.exists("poll_question", async (err, result) => {
 			if (result == 0) {
@@ -83,24 +102,6 @@ class Teachers {
 				res.json({ total_vote: total_vote });
 			});
 		});
-	}
-
-	// process
-	create_poll_process(req, res) {
-		let choices = [];
-		for (let i = 0; i < req.body.choice.length; i++) {
-			choices.push({
-				choice: req.body.choice[i],
-				vote: 0,
-			});
-		}
-		client.hmset("poll_question", ["question", req.body.question, "choices", JSON.stringify(choices)], (err, result) => {
-			console.log(`here are the results ${result}`);
-		});
-
-		client.expire("poll_question", 7200); ///expire in 2hrs
-		console.log(req.body);
-		res.redirect("/create_poll");
 	}
 }
 

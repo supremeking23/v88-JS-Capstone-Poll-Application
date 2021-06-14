@@ -75,43 +75,37 @@ io.on("connection", function (socket) {
 	socket.on("send-poll-answer", function (data) {
 		console.log(data);
 		socket.broadcast.emit("update-poll-data", { message: "update poll data" });
-	});
 
-	// let number_of_students = [];
-	// socket.on("student-enter-the-poll", function (data) {
-	// 	// number_of_students = number_of_students + 1;
-	// 	number_of_students.push(1);
-	// 	let n_student = number_of_students.length;
-	// 	console.log(data.message);
-	// 	console.log(number_of_students);
-	// 	socket.broadcast.emit("student-enter-the-poll-response", { number_of_students: n_student });
-	// });
+		client.exists("poll_question", async (err, result) => {
+			if (result == 0) {
+				// res.redirect("/teacher_create_poll");
+				return false;
+			}
+			client.hgetall("poll_question", async (err, obj) => {
+				console.log(obj);
+				let list = JSON.parse(obj.choices);
+
+				let total_vote = 0;
+				for (let i = 0; i < list.length; i++) {
+					// console.log(list[i].choice);
+					total_vote = total_vote + list[i].vote;
+				}
+
+				socket.broadcast.emit("update-vote-count", { message: "update vote data", total_vote });
+
+				client.hmset("poll_question", ["choices", JSON.stringify(list)], (err, result) => {
+					console.log(`here are the results ${result}`);
+				});
+				console.log(list);
+				console.log(req.body);
+				// res.redirect("student_response_view");
+				res.json({ message: "ok" });
+			});
+		});
+	});
 
 	socket.on("disconnect", function () {
 		console.log(`a user is disconnected`);
-
-		// client.exists("number_of_students", async (err, result) => {
-		// 	// if (result == 0) {
-		// 	// 	client.hmset("number_of_students", ["students", 0], (err, result) => {});
-		// 	// }
-
-		// 	client.hgetall("number_of_students", async (err, obj) => {
-		// 		// console.log("hi from nunber");
-
-		// 		let number_of_students = parseInt(obj.students) - 1;
-		// 		client.hmset("number_of_students", ["students", number_of_students], (err, result) => {
-		// 			client.hgetall("number_of_students", async (err, obj) => {
-		// 				// let number_of_students = parseInt(obj.students) + 1;
-		// 				console.log(obj);
-		// 				console.log(number_of_students);
-
-		// 				socket.broadcast.emit("student-enter-the-poll-response", { number_of_students: obj.students });
-		// 			});
-		// 		});
-		// 	});
-		// });
-
-		// users = [];
 	});
 });
 

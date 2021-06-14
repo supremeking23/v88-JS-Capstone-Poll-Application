@@ -109,8 +109,14 @@
 					console.log(`student count ${data.number_of_students}`);
 				});
 
-				socket.on("update-poll-data", function (data) {
+				// socket.on("update-poll-data", function (data) {
+				// 	console.log(`hi`);
+				// 	console.log(data);
+				// });
+
+				socket.on("update-vote-count", function (data) {
 					console.log(`hi`);
+					$(".live-vote-count").html(`${data.total_vote} voted`);
 					console.log(data);
 				});
 			});

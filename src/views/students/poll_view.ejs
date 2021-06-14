@@ -1,9 +1,11 @@
 <%- include('../includes/head')%>
 	<body>
 		<%- include('../includes/nav')%>
+       
 
 		<div class="mt-2 container">
 			<!-- Page Layout here -->
+            <%- include('../includes/modal')%>
 
             <div class="row mt-2">
                 <div class="col s12">
@@ -66,6 +68,15 @@
                     },3000);
                     return false;
                    
+               });
+
+
+               $(".proceed-to-poll-result").click(function(){
+                    setTimeout(()=>{
+                        // Simulate an HTTP redirect:
+                        window.location.replace("http://localhost:9000/student_response_view");
+                    },500);
+                    return false;
                })
 
                 // $(".test").click(function(){

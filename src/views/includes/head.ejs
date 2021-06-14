@@ -112,9 +112,13 @@
 					$(".answer-poll").removeClass("disabled");
 				});
 
+				var Modalelem = document.querySelector(".stop-collecting");
+				var instance = M.Modal.init(Modalelem);
 				socket.on("stop-collecting-data-response", function (data) {
 					console.log(data.message);
 					$(".answer-poll").addClass("disabled");
+
+					instance.open();
 				});
 
 				socket.on("student-enter-the-poll-response", function (data) {

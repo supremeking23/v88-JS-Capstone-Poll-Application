@@ -74,34 +74,25 @@ io.on("connection", function (socket) {
 
 	socket.on("send-poll-answer", function (data) {
 		console.log(data);
+
 		socket.broadcast.emit("update-poll-data", { message: "update poll data" });
+		socket.broadcast.emit("update-vote-count", { message: "update vote data" });
+		// client.exists("poll_question", (err, result) => {
+		// 	if (result == 0) {
 
-		client.exists("poll_question", async (err, result) => {
-			if (result == 0) {
-				// res.redirect("/teacher_create_poll");
-				return false;
-			}
-			client.hgetall("poll_question", async (err, obj) => {
-				console.log(obj);
-				let list = JSON.parse(obj.choices);
+		// 		return false;
+		// 	}
+		// 	client.hgetall("poll_question", (err, obj) => {
+		// 		console.log(obj);
+		// 		let list = JSON.parse(obj.choices);
 
-				let total_vote = 0;
-				for (let i = 0; i < list.length; i++) {
-					// console.log(list[i].choice);
-					total_vote = total_vote + list[i].vote;
-				}
+		// 		let total_vote = 0;
+		// 		for (let i = 0; i < list.length; i++) {
+		// 			// console.log(list[i].choice);
+		// 			total_vote = total_vote + list[i].vote;
+		// 		}
 
-				socket.broadcast.emit("update-vote-count", { message: "update vote data", total_vote });
-
-				client.hmset("poll_question", ["choices", JSON.stringify(list)], (err, result) => {
-					console.log(`here are the results ${result}`);
-				});
-				console.log(list);
-				console.log(req.body);
-				// res.redirect("student_response_view");
-				res.json({ message: "ok" });
-			});
-		});
+		// });
 	});
 
 	socket.on("disconnect", function () {

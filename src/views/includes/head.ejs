@@ -114,10 +114,17 @@
 				// 	console.log(data);
 				// });
 
+				// socket.on("update-vote-count", function (data) {
+				// 	console.log(`hi`);
+				// 	$(".live-vote-count").html(`${data.total_vote} voted`);
+				// 	console.log(data);
+				// });
+
 				socket.on("update-vote-count", function (data) {
-					console.log(`hi`);
-					$(".live-vote-count").html(`${data.total_vote} voted`);
-					console.log(data);
+					$.get(`http://localhost:9000/get_vote_count_json`, function (response) {
+						console.log(response);
+						$(".live-vote-count").html(`${response.total_vote} voted`);
+					});
 				});
 			});
 		</script>

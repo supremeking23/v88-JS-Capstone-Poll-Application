@@ -66,6 +66,25 @@ class Teachers {
 		});
 	}
 
+	get_vote_count_json(req, res) {
+		client.exists("poll_question", (err, result) => {
+			if (result == 0) {
+				return false;
+			}
+			client.hgetall("poll_question", (err, obj) => {
+				console.log(obj);
+				let list = JSON.parse(obj.choices);
+				let total_vote = 0;
+				for (let i = 0; i < list.length; i++) {
+					// console.log(list[i].choice);
+					total_vote = total_vote + list[i].vote;
+				}
+
+				res.json({ total_vote: total_vote });
+			});
+		});
+	}
+
 	// process
 	create_poll_process(req, res) {
 		let choices = [];

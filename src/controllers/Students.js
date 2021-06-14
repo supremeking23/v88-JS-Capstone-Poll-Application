@@ -89,7 +89,7 @@ class Students {
 				console.log(list);
 				console.log(req.body);
 				// res.redirect("student_response_view");
-				res.json({ message: "ok" });
+				res.json({ message: "Your response has been send successfully" });
 			});
 		});
 	}

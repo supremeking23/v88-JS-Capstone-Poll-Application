@@ -52,11 +52,13 @@
 
 
                $("form").submit(function(){
-                   $.post($(this).attr("action"),$(this).serialize(),function(res){
-                       console.log(res);
+                   $.post($(this).attr("action"),$(this).serialize(),function(response){
+                      
+                       M.toast({ html: response.message ,classes: `button-primary`});
                    },"json");
 
                    socket.emit("send-poll-answer",{message:"send-poll-answer"});
+                   
                     // alert("hi");
                     setTimeout(()=>{
                         // Simulate an HTTP redirect:

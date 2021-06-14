@@ -31,19 +31,22 @@
 			$(document).ready(function () {
 				const socket = io();
 
-				$(".stop-collecting-button").hide();
+				socket.emit("get_poll_application_session", { message: "get poll application session" });
+				socket.on("collecting_response_state", function (data) {
+					console.log("tawag please");
+					console.log(data);
+					if (data.state == "true") {
+						//convert string to bool
 
-				// $(".sidenav").sidenav();
-				// $(".modal").modal();
-				// $("select").formSelect();
-				// var Modalelem = document.querySelector(".modal-error");
-				// var instance = M.Modal.init(Modalelem);
-				// if ($(".form_errors").val() == "true") {
-				// 	instance.open();
-				// }
-				// if ($(".notification-message").val() != "") {
-				// 	M.toast({ html: $(".notification-message").val(), classes: $(".notification-style").val() });
-				// }
+						$(".start-collecting-button").hide();
+						$(".stop-collecting-button").show();
+					} else if (data.state == "false") {
+						$(".stop-collecting-button").hide();
+						$(".start-collecting-button").show();
+					}
+				});
+
+				$(".stop-collecting-button").hide();
 
 				$("textarea").focus();
 

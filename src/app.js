@@ -32,15 +32,58 @@ const client = redis.createClient(6379); //port number is optional
 // });
 
 io.on("connection", function (socket) {
-	console.log(`a user is connected`);
+	socket.on("get_poll_application_session", function (data) {
+		console.log(data);
+		client.exists("poll_application_session", async (err, result) => {
+			if (result == 0) {
+				// do nothing
+			}
+
+			client.hgetall("poll_application_session", async (err, obj) => {
+				console.log(obj);
+				socket.emit("collecting_response_state", { state: obj.start_collecting_response });
+			});
+
+			client.exists("number_of_students", async (err, result) => {
+				if (result == 0) {
+					// client.hmset("number_of_students", ["students", 0], (err, result) => {});
+					// client.expire("user_session", 1200); ///expire in 2hrs
+				}
+
+				// console.log("hi from nunber");
+				client.hgetall("number_of_students", async (err, obj) => {
+					// let number_of_students = parseInt(obj.students) + 1;
+					console.log(obj);
+					socket.emit("student-enter-the-poll-response", { number_of_students: obj.students });
+					socket.broadcast.emit("student-enter-the-poll-response", { number_of_students: obj.students });
+				});
+				socket.emit("update-vote-count", { message: "update vote data" });
+				socket.broadcast.emit("update-vote-count", { message: "update vote data" });
+			});
+		});
+	});
 
 	socket.on("start-collecting-data", function (data) {
 		console.log(data.message);
+
+		client.exists("poll_application_session", async (err, result) => {
+			if (result == 0) {
+				client.hmset("poll_application_session", ["start_collecting_response", true], (err, result) => {});
+				client.expire("poll_application_session", 1200); ///expire in 2hrs
+			}
+
+			client.hmset("poll_application_session", ["start_collecting_response", true], (err, result) => {});
+		});
 
 		socket.broadcast.emit("start-collecting-data-response", { message: "start collecting data response" });
 	});
 
 	socket.on("stop-collecting-data", function (data) {
+		client.exists("poll_application_session", async (err, result) => {
+			if (result == 0) {
+			}
+			client.hmset("poll_application_session", ["start_collecting_response", false], (err, result) => {});
+		});
 		socket.broadcast.emit("stop-collecting-data-response", { message: "stop collecting data response" });
 	});
 
@@ -95,9 +138,7 @@ io.on("connection", function (socket) {
 		// });
 	});
 
-	socket.on("disconnect", function () {
-		console.log(`a user is disconnected`);
-	});
+	socket.on("disconnect", function () {});
 });
 
 // for image/js/css

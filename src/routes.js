@@ -19,4 +19,6 @@ module.exports = (app) => {
 
 	app.post("/create_poll_process", teacher.create_poll_process);
 	app.post("/submit_response_process", student.submit_response_process);
+
+	app.post("/submit_response_process_json", student.submit_response_process_json);
 };

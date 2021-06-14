@@ -9,7 +9,7 @@
                 <div class="col s12">
                     <div class="card p-2">
                         <h3><%= question %></h3>
-                        <form action="/submit_response_process" method="POST">
+                        <form action="/submit_response_process_json" method="POST">
                             <div class="row">
                                 <div class="col s12">
                                     <%for(let choice in choice_list){ %>
@@ -32,6 +32,8 @@
                               
                             </div>
                             <button type="submit" class="btn button-primary"><i class="material-icons right">send</i>Submit</button>
+
+                            
                         </form>
                     </div>
                 </div>
@@ -44,9 +46,29 @@
 
 		<script>
            $(document).ready(function(){
-                const socket = io();
+               const socket = io();
                console.log("student enter the poll");
                socket.emit("student-enter-the-poll",{message:"student enter the poll"});
+
+
+               $("form").submit(function(){
+                   $.post($(this).attr("action"),$(this).serialize(),function(res){
+                       console.log(res);
+                   },"json");
+
+                   socket.emit("send-poll-answer",{message:"send-poll-answer"});
+                    // alert("hi");
+                    setTimeout(()=>{
+                        // Simulate an HTTP redirect:
+                        window.location.replace("http://localhost:9000/student_response_view");
+                    },3000);
+                    return false;
+                   
+               })
+
+                // $(".test").click(function(){
+                //     socket.emit("send-poll-answer",{message:"send-poll-answer"});
+                // });
            })
         </script>
 

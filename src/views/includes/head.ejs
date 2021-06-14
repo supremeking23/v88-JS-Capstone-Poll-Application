@@ -108,6 +108,11 @@
 					$(".live-count").html(`${data.number_of_students} live`);
 					console.log(`student count ${data.number_of_students}`);
 				});
+
+				socket.on("update-poll-data", function (data) {
+					console.log(`hi`);
+					console.log(data);
+				});
 			});
 		</script>
 		<title>Capstone</title>

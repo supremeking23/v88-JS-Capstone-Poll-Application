@@ -65,6 +65,35 @@ class Students {
 		});
 	}
 
+	// json
+
+	submit_response_process_json(req, res) {
+		client.exists("poll_question", async (err, result) => {
+			if (result == 0) {
+				// res.redirect("/teacher_create_poll");
+				return false;
+			}
+			client.hgetall("poll_question", async (err, obj) => {
+				console.log(obj);
+				let list = JSON.parse(obj.choices);
+				for (let i = 0; i < list.length; i++) {
+					// console.log(list[i].choice);
+					if (list[i].choice == req.body.choice) {
+						list[i].vote = list[i].vote + 1;
+					}
+				}
+
+				client.hmset("poll_question", ["choices", JSON.stringify(list)], (err, result) => {
+					console.log(`here are the results ${result}`);
+				});
+				console.log(list);
+				console.log(req.body);
+				// res.redirect("student_response_view");
+				res.json({ message: "ok" });
+			});
+		});
+	}
+
 	student_response_view(req, res) {
 		client.exists("poll_question", async (err, result) => {
 			if (result == 0) {

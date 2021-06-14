@@ -72,6 +72,11 @@ io.on("connection", function (socket) {
 		});
 	});
 
+	socket.on("send-poll-answer", function (data) {
+		console.log(data);
+		socket.broadcast.emit("update-poll-data", { message: "update poll data" });
+	});
+
 	// let number_of_students = [];
 	// socket.on("student-enter-the-poll", function (data) {
 	// 	// number_of_students = number_of_students + 1;

@@ -91,7 +91,7 @@
 
 					setTimeout(() => {
 						// Simulate an HTTP redirect:
-						window.location.replace("http://localhost:9000/create_poll");
+						window.location.replace("https://413eb019ae5b.ngrok.io/create_poll");
 					}, 500);
 					$(".stop-collecting-button").hide();
 					$(".start-collecting-button").show();
@@ -135,7 +135,7 @@
 				// });
 
 				socket.on("update-vote-count", function (data) {
-					$.get(`http://localhost:9000/get_vote_count_json`, function (response) {
+					$.get(`https://413eb019ae5b.ngrok.io/get_vote_count_json`, function (response) {
 						console.log(response);
 						$(".live-vote-count").html(`${response.total_vote} voted`);
 					});

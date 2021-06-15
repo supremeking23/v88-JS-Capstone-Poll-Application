@@ -64,7 +64,7 @@
                 const socket = io();
 
                 function load_response(){
-                    $.get(`http://localhost:9000/teacher_response_data_json`,function(response){
+                    $.get(`https://413eb019ae5b.ngrok.io/teacher_response_data_json`,function(response){
                         let total_sum = 0;
                         for(let i =0; i < response.response_list.length;i++){
                             total_sum = response.response_list[i].y + total_sum;
@@ -126,50 +126,7 @@
                     load_response();
 
 
-                    // $.get(`http://localhost:9000/teacher_response_data_json`,function(response){
-
-                    //     let total_sum = 0;
-                    //     for(let i =0; i < response.response_list.length;i++){
-                    //         total_sum = response.response_list[i].y + total_sum;
-                    //     }
-               
-                    //     let progress_bar = ``;
-                    //     for(let i =0; i < response.response_list.length;i++){
-                    //         progress_bar += `<div class="progress">`;
-                    //         progress_bar += `   <span>${response.response_list[i].label}</span>`;
-                    //         progress_bar += `   <div class="determinate " style="width:${(response.response_list[i].y/total_sum) * 100}%; animation: grow 2s;">${(response.response_list[i].y/total_sum) * 100}%</div>`;
-                    //         progress_bar += `</div>`;
-                            
-                    //     }
-                    //     $(".percentage-section").html(progress_bar);
-
-                        
-                    //     var chart = new CanvasJS.Chart("chartContainer", {
-                    //         animationEnabled: true,
-                    //         theme: "dark2", // "light1", "light2", "dark1", "dark2"
-                    //         title:{
-                    //             text: `<%= question %>`
-                    //         },
-                    //         axisY: {
-                    //             title: ""
-                    //         },
-                    //         axisY:{
-                    //             // interval: 10,
-                    //             // suffix: "%" //going to workin in stacked bar
-                    //         },
-                    //         data: [{        
-                    //             type: "column",  
-                    //             showInLegend: true, 
-                    //             legendMarkerColor: "grey",
-                    //             legendText: "",
-                    //             dataPoints: response.response_list
-
-                    //         }]
-                    //     });
-                    //     chart.render();
-
-
-                    // },"json");
+                   
                 });
                 // update-poll-data
             });

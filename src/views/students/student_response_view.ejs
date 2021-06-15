@@ -29,54 +29,9 @@
 		<script>
             $(document).ready(function(){
                 const socket = io();
-                $.get(`http://localhost:9000/teacher_response_data_json`,function(response){
-                    console.log(response);
-
-                    var chart = new CanvasJS.Chart("chartContainer", {
-                        animationEnabled: true,
-                        theme: "dark2", // "light1", "light2", "dark1", "dark2"
-                        title:{
-                            text: `<%= question %>`
-                        },
-                        axisY: {
-                            title: ""
-                        },
-                        axisY:{
-                            // interval: 10,
-                            // suffix: "%" //going to workin in stacked bar
-                        },
-                        data: [{        
-                            type: "column",  
-                            showInLegend: true, 
-                            legendMarkerColor: "grey",
-                            legendText: "",
-                            // dataPoints: [      
-                            //     // { y: 300878, label: "Venezuela" },
-                            //     // { y: 266455,  label: "Saudi" },
-                            //     // { y: 169709,  label: "Canada" },
-                            //     // { y: 158400,  label: "Iran" },
-                            //     // { y: 142503,  label: "Iraq" },
-                            //     // { y: 101500, label: "Kuwait" },
-                            //     // { y: 97800,  label: "UAE" },
-                        
-                        
-                            // ]
-
-                            dataPoints: response.response_list
-
-                        }]
-                    });
-                    chart.render();
-
-
-                },"json");
-
-
-                socket.on("update-poll-data",function(data){
-                    console.log(`hi`);
-                    console.log(data);
-                    $.get(`http://localhost:9000/teacher_response_data_json`,function(response){
-                    console.log(response);
+                function load_response(){
+                    $.get(`https://413eb019ae5b.ngrok.io/teacher_response_data_json`,function(response){
+                        console.log(response);
 
                         var chart = new CanvasJS.Chart("chartContainer", {
                             animationEnabled: true,
@@ -96,7 +51,17 @@
                                 showInLegend: true, 
                                 legendMarkerColor: "grey",
                                 legendText: "",
-                             
+                                // dataPoints: [      
+                                //     // { y: 300878, label: "Venezuela" },
+                                //     // { y: 266455,  label: "Saudi" },
+                                //     // { y: 169709,  label: "Canada" },
+                                //     // { y: 158400,  label: "Iran" },
+                                //     // { y: 142503,  label: "Iraq" },
+                                //     // { y: 101500, label: "Kuwait" },
+                                //     // { y: 97800,  label: "UAE" },
+                            
+                            
+                                // ]
 
                                 dataPoints: response.response_list
 
@@ -106,6 +71,11 @@
 
 
                     },"json");
+                }
+                load_response();
+
+                socket.on("update-poll-data",function(data){
+                    load_response();
                 });
             });
         </script>

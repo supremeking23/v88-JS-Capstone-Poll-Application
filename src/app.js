@@ -84,6 +84,8 @@ io.on("connection", function (socket) {
 			if (result == 0) {
 			}
 			client.hmset("poll_application_session", ["start_collecting_response", false], (err, result) => {});
+			client.hmset("number_of_students", ["students", 0], (err, result) => {});
+			client.del("poll_question");
 		});
 		socket.broadcast.emit("stop-collecting-data-response", { message: "stop collecting data response" });
 	});

@@ -37,14 +37,13 @@
 					console.log("tawag please");
 					console.log(data);
 					if (data.state == "true") {
-						//convert string to bool
-
-						// $(".start-collecting-button").hide();
 						$(".stop-collecting-button").show();
 						$(".start-collecting-button").hide();
+						$(".answer-poll").removeClass("disabled");
 					} else if (data.state == "false") {
 						$(".stop-collecting-button").hide();
 						$(".start-collecting-button").show();
+						$(".answer-poll").addClass("disabled");
 					}
 				});
 

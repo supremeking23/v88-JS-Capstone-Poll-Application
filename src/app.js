@@ -36,7 +36,8 @@ io.on("connection", function (socket) {
 		console.log(data);
 		client.exists("poll_application_session", async (err, result) => {
 			if (result == 0) {
-				// do nothing
+				client.hmset("poll_application_session", ["start_collecting_response", false], (err, result) => {});
+				client.expire("poll_application_session", 1200); ///expire in 2hrs
 			}
 
 			client.hgetall("poll_application_session", async (err, obj) => {
@@ -67,10 +68,10 @@ io.on("connection", function (socket) {
 		console.log(data.message);
 
 		client.exists("poll_application_session", async (err, result) => {
-			if (result == 0) {
-				client.hmset("poll_application_session", ["start_collecting_response", true], (err, result) => {});
-				client.expire("poll_application_session", 1200); ///expire in 2hrs
-			}
+			// if (result == 0) {
+			// 	client.hmset("poll_application_session", ["start_collecting_response", true], (err, result) => {});
+			// 	client.expire("poll_application_session", 1200); ///expire in 2hrs
+			// }
 
 			client.hmset("poll_application_session", ["start_collecting_response", true], (err, result) => {});
 		});

@@ -78,20 +78,13 @@
 
 				// with socket
 
-				$(".start-collecting-button").click(function () {
-					// alert("start collecting data");
-					socket.emit("start-collecting-data", { message: "start collecting data trigger" });
-					$(this).hide();
-					// $(this).remove();
-					$(".stop-collecting-button").show();
+				// $(".start-collecting-button").click(function () {
+				// 	socket.emit("start-collecting-data", { message: "start collecting data trigger" });
+				// 	$(this).hide();
 
-					// let html = `Stop collecting response (<span class="live-vote-count">5 voted</span>,<span class="live-count">7 live</span>)`;
-					// $(this).html(html);
-					// $(this).removeClass("start-collecting-button");
-					// $(this).removeClass("button-primary");
-					// $(this).addClass("stop-collecting-button");
-					// $(this).addClass("btn-danger");
-				});
+				// 	$(".stop-collecting-button").show();
+
+				// });
 
 				$(".stop-collecting-button-main").click(function () {
 					// $(this).hide();

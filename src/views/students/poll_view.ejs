@@ -71,11 +71,13 @@
                });
 
 
-               $(".proceed-to-poll-result").click(function(){
+               $(".redirect-to-index").click(function(){
                     setTimeout(()=>{
                         // Simulate an HTTP redirect:
-                        window.location.replace("http://localhost:9000/student_response_view");
-                    },500);
+                        window.location.replace("http://localhost:9000/");
+                    },200);
+                  
+                    alert("ssdds");
                     return false;
                })
 
